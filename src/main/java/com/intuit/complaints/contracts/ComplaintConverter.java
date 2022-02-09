@@ -26,7 +26,8 @@ public class ComplaintConverter implements Converter<Complaint, ComplaintContrac
                 source.getSubject(),
                 source.getComplaint(),
                 purchaseService.getPurchase(source.getPurchaseId()),
-                source.getCreationDate());
+                source.getCreationDate()
+        );
     }
 
 }

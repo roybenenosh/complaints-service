@@ -7,13 +7,14 @@ import com.intuit.complaints.core.PurchaseService;
 import com.intuit.complaints.core.UserService;
 import com.intuit.complaints.dal.Purchase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/purchases")
+@RequestMapping("/complaints")
 @RequiredArgsConstructor
 public class ComplaintController {
 
@@ -24,13 +25,13 @@ public class ComplaintController {
         ComplaintContract complaintContract = complaintService.getComplaint(complaintId);
 
         if (complaintContract == null) {
-            ResponseEntity.notFound();
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
         return ResponseEntity.ok(complaintContract);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Object> createComplaint(@RequestBody CreateComplaintRequest request) {
         complaintService.createComplaint(request);
         return ResponseEntity.ok("Complaint was sent");

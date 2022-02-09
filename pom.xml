@@ -14,11 +14,13 @@
 	<artifactId>complaints-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>complaints-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Consumes and saves buyer complaints</description>
 	<packaging>jar</packaging>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -31,6 +33,14 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
