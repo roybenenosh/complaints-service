@@ -17,7 +17,8 @@ import java.util.UUID;
 public class ComplaintServiceImpl implements ComplaintService {
 
     private final ComplaintRepository complaintRepository;
-    private final ConversionService conversionService;
+    private final UserService userService;
+    private final PurchaseService purchaseService;
     private final ComplaintKafkaProducer complaintKafkaProducer;
 
     @Override
@@ -26,7 +27,15 @@ public class ComplaintServiceImpl implements ComplaintService {
 
         if (dbItem.isEmpty()) return null;
 
-        return conversionService.convert(dbItem.orElse(null), ComplaintContract.class);
+        Complaint complaint = dbItem.get();
+
+        return new ComplaintContract(complaint.getId(),
+                userService.getUser(complaint.getUserId()),
+                complaint.getSubject(),
+                complaint.getComplaint(),
+                purchaseService.getPurchase(complaint.getPurchaseId()),
+                complaint.getCreationDate()
+        );
     }
 
     @Override

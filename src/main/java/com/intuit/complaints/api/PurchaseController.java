@@ -2,6 +2,7 @@ package com.intuit.complaints.api;
 
 import com.intuit.complaints.core.PurchaseService;
 import com.intuit.complaints.dal.Purchase;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class PurchaseController {
         Purchase purchase = purchaseService.getPurchase(purchaseId);
 
         if (purchase == null) {
-            ResponseEntity.notFound();
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
         return ResponseEntity.ok(purchase);
