@@ -59,10 +59,27 @@ public class ComplaintServiceImplTest {
         );
 
         // when
-        complaintService.createComplaint(request);
+        UUID complaintId = complaintService.createComplaint(request);
 
         // then
         verify(complaintKafkaProducer).sendComplaint(any(Complaint.class));
+        assertNotNull(complaintId);
+    }
+
+    @Test
+    public void createComplaintInvalidRequestTest() {
+        // given
+        CreateComplaintRequest request = new CreateComplaintRequest(complaint.getUserId(),
+                complaint.getSubject(),
+                complaint.getComplaint(),
+                null
+        );
+
+        // when
+        UUID complaintId = complaintService.createComplaint(request);
+
+        // then
+        assertNull(complaintId);
     }
 
     @Test

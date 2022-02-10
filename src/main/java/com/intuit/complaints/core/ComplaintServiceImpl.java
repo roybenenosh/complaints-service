@@ -24,6 +24,10 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     @Override
     public UUID createComplaint(CreateComplaintRequest request) {
+        if (requestIsInvalid(request)) {
+            return null;
+        }
+
         Complaint complaint = new Complaint(UUID.randomUUID(),
                 request.getUserId(),
                 request.getSubject(),
@@ -63,6 +67,13 @@ public class ComplaintServiceImpl implements ComplaintService {
 
         complaintRepository.deleteById(complaintId);
         return complaintId;
+    }
+
+    private boolean requestIsInvalid(CreateComplaintRequest request) {
+        return request.getUserId() == null ||
+                request.getPurchaseId() == null ||
+                request.getSubject() == null ||
+                request.getComplaint() == null;
     }
 
 }

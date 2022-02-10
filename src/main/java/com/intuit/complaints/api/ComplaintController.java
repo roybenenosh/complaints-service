@@ -27,6 +27,10 @@ public class ComplaintController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+        if (complaintId == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         return ResponseEntity.ok("Complaint was sent. Complaint ID: " + complaintId.toString());
     }
 
