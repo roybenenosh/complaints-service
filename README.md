@@ -14,8 +14,8 @@ Open SQL Shell (psql) and connect to the db "intuiit".<br/>
 All the required details are default except: password: admin; database: intuit.<br/>
 If you are using IntelliJ IDEA, it is recommended connecting to the data source for more comfortable interface.
 
-Enable UUID ossp extension to create a table with UUID column
-yum install -y postgresql14
+Enable UUID ossp extension to create a table with UUID column<br/>
+yum install -y postgresql14<br/>
 postgres=# create extension "uuid-ossp" ;
 
 After connecting to db, create a complaint table with the command:
