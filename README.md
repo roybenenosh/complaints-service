@@ -17,10 +17,10 @@ If you are using IntelliJ IDEA, it is recommended connecting to the data source 
 After connecting to db, create a complaint table with the command:
 CREATE TABLE complaints(id UUID NOT NULL DEFAULT uuid_generate_v1(), user_id VARCHAR(64), subject VARCHAR(255), complaint VARCHAR(255), purchase_id VARCHAR(64), creation_date DATE NOT NULL, PRIMARY KEY (id));
 
-Kafka<br/>
+Kafka:<br/>
 Navigate to your local kafka directory and run the commands:<br/>
 bin/zookeeper-server-start.sh config/zookeeper.properties<br/>
 bin/kafka-server-start.sh config/server.properties
 
-Services<br/>
+Services:<br/>
 Run the complaint-service and complaint-consumer services
