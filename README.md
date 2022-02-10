@@ -10,8 +10,8 @@ https://github.com/roybenenosh/complaints-service<br/>
 https://github.com/roybenenosh/complaints-consumer
 
 DB:<br/>
-Open SQL Shell (psql) and connect to the db
-All the required details are default except: user: postgres; password: admin; database: intuit.<br/>
+Open SQL Shell (psql) and connect to the db "intuiit".<br/>
+All the required details are default except: password: admin; database: intuit.<br/>
 If you are using IntelliJ IDEA, it is recommended connecting to the data source for more comfortable interface.
 
 After connecting to db, create a complaint table with the command:
