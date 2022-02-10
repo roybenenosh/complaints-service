@@ -19,7 +19,7 @@ CREATE TABLE complaints(id UUID NOT NULL DEFAULT uuid_generate_v1(), user_id VAR
 
 Kafka<br/>
 Navigate to your local kafka directory and run the commands:<br/>
-bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/zookeeper-server-start.sh config/zookeeper.properties<br/>
 bin/kafka-server-start.sh config/server.properties
 
 Services<br/>
