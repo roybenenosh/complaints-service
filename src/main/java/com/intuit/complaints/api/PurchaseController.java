@@ -2,6 +2,7 @@ package com.intuit.complaints.api;
 
 import com.intuit.complaints.core.PurchaseService;
 import com.intuit.complaints.dal.Purchase;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,9 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/purchases")
+@RequiredArgsConstructor
 public class PurchaseController {
     private final PurchaseService purchaseService;
-
-    public PurchaseController(PurchaseService purchaseService) {
-        this.purchaseService = purchaseService;
-    }
 
     @GetMapping("/{purchaseId}")
     public ResponseEntity<Purchase> getPurchase(@PathVariable UUID purchaseId) {

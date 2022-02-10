@@ -8,8 +8,10 @@ import java.util.UUID;
 
 public interface ComplaintService {
 
-    ComplaintContract getComplaint(UUID id);
+    UUID createComplaint(CreateComplaintRequest request);
 
-    void createComplaint(CreateComplaintRequest request);
+    ComplaintContract getComplaint(UUID complaintId);
+
+    UUID deleteComplaint(UUID complaintId);
 
 }

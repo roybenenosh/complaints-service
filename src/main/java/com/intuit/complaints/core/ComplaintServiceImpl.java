@@ -5,15 +5,16 @@ import com.intuit.complaints.contracts.CreateComplaintRequest;
 import com.intuit.complaints.dal.Complaint;
 import com.intuit.complaints.dal.ComplaintRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.convert.ConversionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ComplaintServiceImpl implements ComplaintService {
 
     private final ComplaintRepository complaintRepository;
@@ -22,8 +23,22 @@ public class ComplaintServiceImpl implements ComplaintService {
     private final ComplaintKafkaProducer complaintKafkaProducer;
 
     @Override
-    public ComplaintContract getComplaint(UUID id) {
-        Optional<Complaint> dbItem = complaintRepository.findById(id);
+    public UUID createComplaint(CreateComplaintRequest request) {
+        Complaint complaint = new Complaint(UUID.randomUUID(),
+                request.getUserId(),
+                request.getSubject(),
+                request.getComplaint(),
+                request.getPurchaseId(),
+                new Date());
+
+        log.info("Sending complaint: " + complaint);
+        complaintKafkaProducer.sendComplaint(complaint);
+        return complaint.getId();
+    }
+
+    @Override
+    public ComplaintContract getComplaint(UUID complaintId) {
+        Optional<Complaint> dbItem = complaintRepository.findById(complaintId);
 
         if (dbItem.isEmpty()) return null;
 
@@ -39,15 +54,15 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
-    public void createComplaint(CreateComplaintRequest request) {
-        Complaint complaint = new Complaint(UUID.randomUUID(),
-                request.getUserId(),
-                request.getSubject(),
-                request.getComplaint(),
-                request.getPurchaseId(),
-                ZonedDateTime.now());
+    public UUID deleteComplaint(UUID complaintId) {
+        Optional<Complaint> complaint = complaintRepository.findById(complaintId);
 
-        complaintKafkaProducer.sendComplaint(complaint);
+        if (complaint.isEmpty()) {
+            return null;
+        }
+
+        complaintRepository.deleteById(complaintId);
+        return complaintId;
     }
 
 }

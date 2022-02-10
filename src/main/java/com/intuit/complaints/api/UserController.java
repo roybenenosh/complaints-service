@@ -2,6 +2,7 @@ package com.intuit.complaints.api;
 
 import com.intuit.complaints.core.UserService;
 import com.intuit.complaints.dal.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable UUID userId) {

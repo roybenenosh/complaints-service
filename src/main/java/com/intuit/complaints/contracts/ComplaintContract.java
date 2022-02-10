@@ -1,13 +1,13 @@
 package com.intuit.complaints.contracts;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.intuit.complaints.dal.Purchase;
 import com.intuit.complaints.dal.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Id;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -20,6 +20,10 @@ public class ComplaintContract {
     private String subject;
     private String complaint;
     private Purchase purchase;
-    private ZonedDateTime creationDate;
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern = "yyyy-MM-dd"
+    )
+    private Date creationDate;
 
 }
