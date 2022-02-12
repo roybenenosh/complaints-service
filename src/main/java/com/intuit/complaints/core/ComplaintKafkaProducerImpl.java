@@ -20,6 +20,7 @@ public class ComplaintKafkaProducerImpl implements ComplaintKafkaProducer {
 
     @Override
     public void sendComplaint(Complaint complaint) {
+        log.info("Producing complaint " + complaint.getId().toString());
         ListenableFuture<SendResult<String, Complaint>> future = kafkaTemplate.send(KAFKA_COMPLAINTS_TOPIC, complaint);
 
         future.addCallback(new ListenableFutureCallback<>() {
@@ -31,7 +32,7 @@ public class ComplaintKafkaProducerImpl implements ComplaintKafkaProducer {
 
             @Override
             public void onFailure(Throwable e) {
-                // add to a scheduled process which fetch the complaints and re-sends them
+                // add to a scheduled process which fetches the complaints and re-sends them
             }
         });
     }
