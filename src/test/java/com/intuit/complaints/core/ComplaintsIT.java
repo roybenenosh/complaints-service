@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = ComplaintApplication.class)
 @AutoConfigureMockMvc
 @Slf4j
-public class ComplaintsIntegrationTest {
+public class ComplaintsIT {
 
     @Autowired
     private MockMvc mvc;
