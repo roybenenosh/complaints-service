@@ -42,6 +42,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     @Override
     public ComplaintContract getComplaint(UUID complaintId) {
+        log.info("Fetching complaint: " + complaintId.toString());
         Optional<Complaint> dbItem = complaintRepository.findById(complaintId);
 
         if (dbItem.isEmpty()) return null;
@@ -59,6 +60,8 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     @Override
     public UUID deleteComplaint(UUID complaintId) {
+        log.info("Deleting complaint: " + complaintId.toString());
+        log.info("Deleting complaint: " + complaintId.toString());
         Optional<Complaint> complaint = complaintRepository.findById(complaintId);
 
         if (complaint.isEmpty()) {
