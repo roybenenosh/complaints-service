@@ -67,22 +67,6 @@ public class ComplaintServiceImplTest {
     }
 
     @Test
-    public void createComplaintInvalidRequestTest() {
-        // given
-        CreateComplaintRequest request = new CreateComplaintRequest(complaint.getUserId(),
-                complaint.getSubject(),
-                complaint.getComplaint(),
-                null
-        );
-
-        // when
-        UUID complaintId = complaintService.createComplaint(request);
-
-        // then
-        assertNull(complaintId);
-    }
-
-    @Test
     public void getComplaintTest() {
         // given
         User user = new User(UUID.fromString("a93adc57-4d59-4a9d-85c6-b5d48d99101d"),
